@@ -1,6 +1,24 @@
 import Image from "next/image";
 
 export default function Home() {
+  const API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY; // .env.local ファイルに TMDB API キーを保存
+  const BASE_URL = "https://api.themoviedb.org/3";
+
+  fetch(
+    `${BASE_URL}/movie/now_playing?api_key=${API_KEY}&language=en-US&region=US&page=1`
+  )
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      // 取得したJSONデータの処理
+      console.log(data);
+    })
+    .catch((error) => {
+      // エラー発生時の処理
+      console.log("error");
+    });
+
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">

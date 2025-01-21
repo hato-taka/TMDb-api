@@ -1,3 +1,15 @@
+
+# 利用API
+https://www.themoviedb.org/u/hato_code
+
+# 使い方
+参考サイト  
+https://chocolat5.com/tips/tmdb-api/
+
+
+
+---
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
