@@ -9,6 +9,13 @@ https://chocolat5.com/tips/tmdb-api/
 # エンドポイント
 https://developer.themoviedb.org/reference/trending-movies
 
+# TiDBの利用
+
+https://tidbcloud.com/console/clusters?orgId=1372813089209254943&projectId=1372813089454572626
+
+TODO: https://qiita.com/RyutoYoda/items/f5e9346b23aa52b78f00 を読む
+
+
 ---
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
