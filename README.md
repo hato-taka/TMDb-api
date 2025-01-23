@@ -6,7 +6,8 @@ https://www.themoviedb.org/u/hato_code
 参考サイト  
 https://chocolat5.com/tips/tmdb-api/
 
-
+# エンドポイント
+https://developer.themoviedb.org/reference/trending-movies
 
 ---
 
