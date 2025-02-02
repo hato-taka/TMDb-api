@@ -13,7 +13,10 @@ https://developer.themoviedb.org/reference/trending-movies
 
 https://tidbcloud.com/console/clusters?orgId=1372813089209254943&projectId=1372813089454572626
 
-TODO: https://qiita.com/RyutoYoda/items/f5e9346b23aa52b78f00 を読む
+5クラスターまで無料
+
+### TiDBの使用方法は下記にまとめる
+https://zenn.dev/wakuto_hato/scraps/a025c349326cc0
 
 
 # AWS amplify でデプロイ
