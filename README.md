@@ -35,7 +35,11 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+```
 
+Prisma Client をビルドして利用
+```bash
+npx prisma generate
 ```
 
 ### TiDB Cloud のエンドポイント情報
