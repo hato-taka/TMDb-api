@@ -18,6 +18,31 @@ https://tidbcloud.com/console/clusters?orgId=1372813089209254943&projectId=13728
 ### TiDBの使用方法は下記にまとめる
 https://zenn.dev/wakuto_hato/scraps/a025c349326cc0
 
+# Prismaの使用
+install
+```
+npm install prisma --save-dev
+```
+
+### TiDB に接続
+
+```prisma/schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+```
+
+### TiDB Cloud のエンドポイント情報
+```.env
+DATABASE_URL="mysql://<username>:<password>@<host>:<port>/<database>?sslaccept=strict"
+```
+
 
 # AWS amplify でデプロイ
 https://main.d27y2h250yphml.amplifyapp.com/
