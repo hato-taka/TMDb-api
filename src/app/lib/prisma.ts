@@ -1,24 +1,9 @@
 import { PrismaClient } from "@prisma/client";
 
-const prisma = new PrismaClient();
+const globalForPrisma = global as unknown as { prisma?: PrismaClient };
 
-async function main() {
-  // ユーザーの作成
-  const actor = await prisma.actor.create({
-    data: {
-      name: "Alice",
-    },
-  });
+export const prisma = globalForPrisma.prisma ?? new PrismaClient();
 
-  console.log("Actor created:", actor);
+if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
 
-  // すべてのユーザーを取得
-  const actors = await prisma.actor.findMany();
-  console.log("Actors:", actors);
-}
-
-main()
-  .catch((e) => console.error(e))
-  .finally(async () => {
-    await prisma.$disconnect();
-  });
+// 開発環境で Prisma クライアントのインスタンスが複数作成されるのを防ぐための対策
