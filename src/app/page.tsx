@@ -3,10 +3,11 @@
 import { useEffect, useState } from "react";
 import { Item } from "./components/Item";
 import InfiniteScroll from "react-infinite-scroll-component";
+import SearchForm from "./components/SearchForm";
 
 export default function Home() {
   const API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY; // .env.local ファイルに TMDB API キーを保存
-  const BASE_URL = "https://api.themoviedb.org/3";
+  const BASE_URL = process.env.NEXT_PUBLIC_TMDB_BASE_URL; // .env.local ファイルに TMDB API のベース URL を保存
 
   type MovieResponse = {
     adult: boolean;
@@ -78,19 +79,19 @@ export default function Home() {
     }
   };
 
-
   return (
     <div>
-        <InfiniteScroll
-          dataLength={movieInfo.length} // 現在のアイテム数
-          next={fetchMoreData} // 次のデータをロードする関数
-          hasMore={hasMore} // まだデータがあるかどうか
-          loader={<h4>Loading...</h4>} // ローディング中に表示される内容
-          endMessage={
-            <p className="text-center my-4">You have seen all the items!</p>
-          } // 終了メッセージ
-        >
-      <ul className="flex flex-wrap w-[720px] mx-auto my-5 max-w-full">
+      <SearchForm />
+      <InfiniteScroll
+        dataLength={movieInfo.length} // 現在のアイテム数
+        next={fetchMoreData} // 次のデータをロードする関数
+        hasMore={hasMore} // まだデータがあるかどうか
+        loader={<h4>Loading...</h4>} // ローディング中に表示される内容
+        endMessage={
+          <p className="text-center my-4">You have seen all the items!</p>
+        } // 終了メッセージ
+      >
+        <ul className="flex flex-wrap w-[720px] mx-auto my-5 max-w-full">
           {movieInfo.map((movie) => {
             return (
               <li key={movie.id} className="w-1/3 p-2">
@@ -98,8 +99,8 @@ export default function Home() {
               </li>
             );
           })}
-      </ul>
-        </InfiniteScroll>
+        </ul>
+      </InfiniteScroll>
     </div>
   );
 }
