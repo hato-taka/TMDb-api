@@ -7,6 +7,6 @@ export async function GET() {
     const actors = await prisma.actor.findMany();
     return NextResponse.json(actors, { status: 200 });
   } catch (error) {
-    return NextResponse.json({ error: "Failed to fetch actors" }, { status: 500 });
+    return NextResponse.json({ error: `Failed to fetch actors. ${error}` }, { status: 500 });
   }
 }
