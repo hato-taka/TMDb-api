@@ -80,7 +80,7 @@ export default function Home() {
   };
 
   return (
-    <div>
+    <div className="w-[720px] mx-auto my-5 max-w-full">
       <SearchForm />
       <InfiniteScroll
         dataLength={movieInfo.length} // 現在のアイテム数
@@ -91,7 +91,7 @@ export default function Home() {
           <p className="text-center my-4">You have seen all the items!</p>
         } // 終了メッセージ
       >
-        <ul className="flex flex-wrap w-[720px] mx-auto my-5 max-w-full">
+        <ul className="flex flex-wrap">
           {movieInfo.map((movie) => {
             return (
               <li key={movie.id} className="w-1/3 p-2">
