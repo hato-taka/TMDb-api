@@ -5,6 +5,7 @@ import { Item } from "./components/Item";
 import InfiniteScroll from "react-infinite-scroll-component";
 import SearchForm from "./components/SearchForm";
 
+// TODO: コンポーネントの切り出し
 export default function Home() {
   const API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY; // .env.local ファイルに TMDB API キーを保存
   const BASE_URL = process.env.NEXT_PUBLIC_TMDB_BASE_URL; // .env.local ファイルに TMDB API のベース URL を保存
@@ -82,6 +83,7 @@ export default function Home() {
   return (
     <div className="w-[720px] mx-auto my-5 max-w-full">
       <SearchForm />
+      <h1 className="text-2xl font-bold my-4">上映中作品</h1>
       <InfiniteScroll
         dataLength={movieInfo.length} // 現在のアイテム数
         next={fetchMoreData} // 次のデータをロードする関数
