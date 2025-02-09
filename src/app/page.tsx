@@ -1,10 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-// import { Item } from "./components/Item";
+import { Item } from "./components/Item";
 import InfiniteScroll from "react-infinite-scroll-component";
-import SearchForm from "./components/SearchForm";
-import Image from "next/image";
+// import SearchForm from "./components/SearchForm";
 
 // TODO: コンポーネントの切り出し
 export default function Home() {
@@ -82,8 +81,8 @@ export default function Home() {
   };
 
   return (
-    <div className="w-[720px] mx-auto my-5 max-w-full">
-      <SearchForm />
+    <div className="w-[720px] mx-auto my-5 max-w-full px-2">
+      {/* <SearchForm /> */}
       <h1 className="text-2xl font-bold my-4">上映中作品</h1>
       <InfiniteScroll
         dataLength={movieInfo.length} // 現在のアイテム数
@@ -97,22 +96,7 @@ export default function Home() {
         <div className="grid grid-cols-1 gap-4 mt-4">
           {movieInfo.map((movie) => (
             <div key={movie.id} className="bg-gray-800 p-4 rounded flex">
-              <Image
-                src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
-                alt={movie.title}
-                width={100}
-                height={150}
-                className="rounded"
-                unoptimized
-              />
-              <div className="ml-4">
-                <h2 className="text-lg font-bold">{movie.title}</h2>
-                <p className="text-sm text-gray-400">
-                  {movie.overview.length > 100
-                    ? `${movie.overview.substring(0, 100)}...`
-                    : movie.overview}
-                </p>
-              </div>
+              <Item movie={movie} />
             </div>
           ))}
         </div>
