@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Item } from "./components/Item";
+// import { Item } from "./components/Item";
 import InfiniteScroll from "react-infinite-scroll-component";
 import SearchForm from "./components/SearchForm";
+import Image from "next/image";
 
 // TODO: コンポーネントの切り出し
 export default function Home() {
@@ -93,15 +94,28 @@ export default function Home() {
           <p className="text-center my-4">You have seen all the items!</p>
         } // 終了メッセージ
       >
-        <ul className="flex flex-wrap">
-          {movieInfo.map((movie) => {
-            return (
-              <li key={movie.id} className="w-1/3 p-2">
-                <Item titleName={movie.title} imgPath={movie.poster_path} />
-              </li>
-            );
-          })}
-        </ul>
+        <div className="grid grid-cols-1 gap-4 mt-4">
+          {movieInfo.map((movie) => (
+            <div key={movie.id} className="bg-gray-800 p-4 rounded flex">
+              <Image
+                src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+                alt={movie.title}
+                width={100}
+                height={150}
+                className="rounded"
+                unoptimized
+              />
+              <div className="ml-4">
+                <h2 className="text-lg font-bold">{movie.title}</h2>
+                <p className="text-sm text-gray-400">
+                  {movie.overview.length > 100
+                    ? `${movie.overview.substring(0, 100)}...`
+                    : movie.overview}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
       </InfiniteScroll>
     </div>
   );
