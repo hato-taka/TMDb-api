@@ -1,17 +1,32 @@
+import Image from "next/image";
+
 type ItemProps = {
-  titleName: string;
-  imgPath: string;
+  movie: {
+    title: string;
+    overview: string;
+    poster_path: string;
+  }
 };
 
-export const Item = ({ titleName, imgPath }: ItemProps) => {
+export const Item = ({ movie }: ItemProps) => {
   return (
-    <div className="item py-3">
-      <img
-        className="w-full h-auto"
-        src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${imgPath}`}
-        alt={titleName}
+    <>
+      <Image
+        src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+        alt={movie.title}
+        width={100}
+        height={150}
+        className="rounded"
+        unoptimized
       />
-      <p className="title mt-1 text-xl text-center font-semibold tracking-wide">{titleName}</p>
-    </div>
+      <div className="ml-4">
+        <h2 className="text-lg font-bold">{movie.title}</h2>
+        <p className="text-sm text-gray-400">
+          {movie.overview.length > 100
+            ? `${movie.overview.substring(0, 100)}...`
+            : movie.overview}
+        </p>
+      </div>
+    </>
   );
 };
