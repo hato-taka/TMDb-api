@@ -1,84 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { Item } from "./components/Item";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { useMovies } from "./hooks/useMovies";
 // import SearchForm from "./components/SearchForm";
 
 // TODO: コンポーネントの切り出し
 export default function Home() {
-  const API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY; // .env.local ファイルに TMDB API キーを保存
-  const BASE_URL = process.env.NEXT_PUBLIC_TMDB_BASE_URL; // .env.local ファイルに TMDB API のベース URL を保存
 
-  type MovieResponse = {
-    adult: boolean;
-    backdrop_path: string;
-    genre_ids: number[];
-    id: number;
-    original_language: string;
-    original_title: string;
-    overview: string;
-    popularity: number;
-    poster_path: string;
-    release_date: string; // YYYY-MM-DD format
-    title: string;
-    video: boolean;
-    vote_average: number;
-    vote_count: number;
-  };
-
-  const [movieInfo, setMovieInfo] = useState<MovieResponse[]>([]);
-  const [hasMore, setHasMore] = useState(true);
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(0);
-
-  useEffect(() => {
-    fetch(
-      `${BASE_URL}/movie/now_playing?api_key=${API_KEY}&language=ja-JP&region=JP&page=1`
-    )
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        console.log(data);
-        // 取得したJSONデータの処理
-        setMovieInfo(data.results);
-        setTotalPages(data.total_pages);
-      })
-      .catch((error) => {
-        // エラー発生時の処理
-        console.log(error);
-      });
-  }, []);
-
-  const fetchMoreData = async () => {
-    if (page > totalPages) {
-      setHasMore(false);
-      return;
-    }
-
-    try {
-      const nextPage = page + 1;
-      setPage(nextPage);
-
-      const response = await fetch(
-        `${BASE_URL}/movie/now_playing?api_key=${API_KEY}&language=ja-JP&region=JP&page=${nextPage}`
-      );
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      console.log(data);
-
-      // 取得したJSONデータの処理
-      setMovieInfo((prevMovieInfo) => [...prevMovieInfo, ...data.results]);
-    } catch (error) {
-      // エラー発生時の処理
-      console.error("Failed to fetch data:", error);
-    }
-  };
+  const { movieInfo, hasMore, fetchMoreData } = useMovies();
 
   return (
     <div className="w-[720px] mx-auto my-5 max-w-full px-2">
