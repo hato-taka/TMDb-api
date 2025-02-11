@@ -4,8 +4,8 @@ import { MovieResponse } from '../types/movie';
 const BASE_URL = process.env.NEXT_PUBLIC_TMDB_BASE_URL;
 const API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY;
 
-export const useMovies = () => {
-  const [movieInfo, setMovieInfo] = useState<MovieResponse[]>([]);
+export const useMovieList = () => {
+  const [movieList, setMovieList] = useState<MovieResponse[]>([]);
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
@@ -27,7 +27,7 @@ export const useMovies = () => {
     fetchMovies(1)
       .then((data) => {
         console.log(data);
-        setMovieInfo(data.results);
+        setMovieList(data.results);
         setTotalPages(data.total_pages);
       })
       .catch((error) => {
@@ -47,11 +47,11 @@ export const useMovies = () => {
 
       const data = await fetchMovies(nextPage);
       console.log(data);
-      setMovieInfo((prevMovies) => [...prevMovies, ...data.results]);
+      setMovieList((prevMovies) => [...prevMovies, ...data.results]);
     } catch (error) {
       console.log(error);
     }
   };
 
-  return { movieInfo, hasMore, fetchMoreData };
+  return { movieList, hasMore, fetchMoreData };
 };

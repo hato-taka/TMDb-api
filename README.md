@@ -8,15 +8,10 @@
 # 利用API
 https://www.themoviedb.org/u/hato_code
 
-# 使い方
-参考サイト  
-https://chocolat5.com/tips/tmdb-api/
-
 # エンドポイント
 https://developer.themoviedb.org/reference/trending-movies
 
 # TiDBの利用
-
 https://tidbcloud.com/console/clusters?orgId=1372813089209254943&projectId=1372813089454572626
 
 5クラスターまで無料
