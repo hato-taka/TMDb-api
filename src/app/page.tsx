@@ -3,16 +3,22 @@
 import { Item } from "./components/Item";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useMovieList } from "./hooks/useMovieList";
+import { useMovie } from "./hooks/useMovie";
 // import SearchForm from "./components/SearchForm";
 
-// TODO: コンポーネントの切り出し
 export default function Home() {
-
   const { movieList, hasMore, fetchMoreData } = useMovieList();
+  const { movieInfo } = useMovie();
 
   return (
     <div className="w-[720px] mx-auto my-5 max-w-full px-2">
       {/* <SearchForm /> */}
+
+      <h1 className="text-2xl font-bold my-4">リクエスト作品</h1>
+      <div className="grid grid-cols-1 gap-4 mt-4">
+        {movieInfo && <Item movie={movieInfo} />}
+      </div>
+
       <h1 className="text-2xl font-bold my-4">上映中作品</h1>
       <InfiniteScroll
         dataLength={movieList.length} // 現在のアイテム数
@@ -25,9 +31,7 @@ export default function Home() {
       >
         <div className="grid grid-cols-1 gap-4 mt-4">
           {movieList.map((movie) => (
-            <div key={movie.id} className="bg-gray-800 p-4 rounded flex">
-              <Item movie={movie} />
-            </div>
+            <Item movie={movie} key={movie.id} />
           ))}
         </div>
       </InfiniteScroll>

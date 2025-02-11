@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
+import { MovieResponse } from "../types/movie";
 
 const BASE_URL = process.env.NEXT_PUBLIC_TMDB_BASE_URL;
 const API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY;
 
 export const useMovie = () => {
-  const [movieInfo, setMovieInfo] = useState([]);
+  const [movieInfo, setMovieInfo] = useState<MovieResponse | null>(null);
 
   const fetchMovie = async (id: number) => {
     const response = await fetch(

@@ -39,30 +39,33 @@ export const Item = ({ movie }: ItemProps) => {
 
   return (
     <>
-      <div onClick={toggleLike} className="relative">
-        <Image
-          src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
-          alt={movie.title}
-          width={200}
-          height={300}
-          className="rounded w-full object-cover"
-          unoptimized
-        />
-        <button className="flex items-center gap-2 p-2 border rounded-lg shadow-md mt-3 bg-gray-800">
-          <Heart
-            size={20}
-            className={liked ? "text-red-500 fill-red-500" : "text-gray-500"}
+      <div key={movie.id} className="bg-gray-800 p-4 rounded flex">
+        <div onClick={toggleLike} className="relative">
+          <Image
+            src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+            alt={movie.title}
+            width={200}
+            height={300}
+            className="rounded w-full object-cover"
+            unoptimized
           />
-          <span>{likeCount}</span>
-        </button>
-      </div>
-      <div className="ml-4 w-full">
-        <h2 className="text-lg font-bold">{movie.title}</h2>
-        <p className="text-sm text-gray-400">
-          {movie.overview.length > 100
+          <button className="flex items-center gap-2 p-2 border rounded-lg shadow-md mt-3 bg-gray-800">
+            <Heart
+              size={20}
+              className={liked ? "text-red-500 fill-red-500" : "text-gray-500"}
+            />
+            <span>{likeCount}</span>
+          </button>
+        </div>
+        <div className="ml-4 w-full">
+          <h2 className="text-lg font-bold">{movie.title}</h2>
+          <p className="text-sm text-gray-400">
+            {/* {movie.overview.length > 100
             ? `${movie.overview.substring(0, 100)}...`
-            : movie.overview}
-        </p>
+            : movie.overview} */}
+            {movie.overview}
+          </p>
+        </div>
       </div>
     </>
   );
