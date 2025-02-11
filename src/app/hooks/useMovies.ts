@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { MovieResponse } from '../types/movie';
 
-const BASE_URL = 'YOUR_BASE_URL';
-const API_KEY = 'YOUR_API_KEY';
+const BASE_URL = process.env.NEXT_PUBLIC_TMDB_BASE_URL;
+const API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY;
 
 export const useMovies = () => {
   const [movieInfo, setMovieInfo] = useState<MovieResponse[]>([]);
