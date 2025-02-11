@@ -1,3 +1,8 @@
+# TODO
+- [ ] いいね！のリアクション機能をつける
+- [ ] みたいものリストのJSONを作る 
+
+
 
 # 利用API
 https://www.themoviedb.org/u/hato_code
