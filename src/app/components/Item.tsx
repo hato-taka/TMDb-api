@@ -39,7 +39,7 @@ export const Item = ({ movie }: ItemProps) => {
 
   return (
     <>
-      <div className="relative">
+      <div onClick={toggleLike} className="relative">
         <Image
           src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
           alt={movie.title}
@@ -48,10 +48,7 @@ export const Item = ({ movie }: ItemProps) => {
           className="rounded w-full object-cover"
           unoptimized
         />
-        <button
-          onClick={toggleLike}
-          className="flex items-center gap-2 p-2 border rounded-lg shadow-md mt-3 bg-gray-800"
-        >
+        <button className="flex items-center gap-2 p-2 border rounded-lg shadow-md mt-3 bg-gray-800">
           <Heart
             size={20}
             className={liked ? "text-red-500 fill-red-500" : "text-gray-500"}
