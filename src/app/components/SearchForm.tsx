@@ -51,16 +51,18 @@ const SearchForm: React.FC = () => {
 
       <div className="mt-4 grid grid-cols-1 gap-4">
         {results.map((movie: Movie) => (
-          <div key={movie.id} className="border p-2 rounded">
+          <div key={movie.id} className="border p-2 rounded flex">
             <img
               src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
               alt={movie.title}
-              className="w-full h-48 object-cover"
+              className="h-48 object-contain"
             />
-            <h3 className="font-bold mt-2">{movie.title}</h3>
-            <p className="text-sm text-gray-600">
-              {movie.release_date?.split("-")[0]}
-            </p>
+            <div className="ml-5">
+              <h3 className="font-bold mt-2">{movie.title}</h3>
+              <p className="text-sm text-gray-600">
+                {movie.release_date?.split("-")[0]}
+              </p>
+            </div>
           </div>
         ))}
       </div>
