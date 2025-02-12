@@ -49,7 +49,7 @@ const SearchForm: React.FC = () => {
         className="p-2 border rounded w-full text-black"
       />
 
-      <div className="mt-4 grid grid-cols-4 gap-4">
+      <div className="mt-4 grid grid-cols-1 gap-4">
         {results.map((movie: Movie) => (
           <div key={movie.id} className="border p-2 rounded">
             <img

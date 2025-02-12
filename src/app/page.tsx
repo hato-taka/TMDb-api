@@ -4,7 +4,7 @@ import { Item } from "./components/Item";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useMovieList } from "./hooks/useMovieList";
 import { useMovie } from "./hooks/useMovie";
-// import SearchForm from "./components/SearchForm";
+import SearchForm from "./components/SearchForm";
 
 export default function Home() {
   const { movieList, hasMore, fetchMoreData } = useMovieList();
@@ -12,7 +12,7 @@ export default function Home() {
 
   return (
     <div className="w-[720px] mx-auto my-5 max-w-full px-2">
-      {/* <SearchForm /> */}
+      <SearchForm />
 
       <h1 className="text-2xl font-bold my-4">リクエスト作品</h1>
       <div className="grid grid-cols-1 gap-4 mt-4">
