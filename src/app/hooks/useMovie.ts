@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
 import { MovieResponse } from "../types/movie";
+import wishList from "../movies.json";
 
 const BASE_URL = process.env.NEXT_PUBLIC_TMDB_BASE_URL;
 const API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY;
 
-export const useMovie = () => {
-  const [movieInfo, setMovieInfo] = useState<MovieResponse | null>(null);
+const ids = wishList.map((movie) => movie.id);
 
-  const fetchMovie = async (id: number) => {
+export const useMovie = () => {
+  const [movieInfoList, setMovieInfoList] = useState<MovieResponse[]>([]);
+
+  const fetchMovie = async (id: string) => {
     const response = await fetch(
       `${BASE_URL}/movie/${id}?api_key=${API_KEY}&language=ja-JP&region=JP`
     );
@@ -21,15 +24,17 @@ export const useMovie = () => {
   };
 
   useEffect(() => {
-    fetchMovie(11216)
-      .then((data) => {
-        console.log(data);
-        setMovieInfo(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    ids.forEach(async (id) => {
+      fetchMovie(id)
+        .then((data) => {
+          console.log(data);
+          setMovieInfoList((prev) => [...prev, data]);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    });
   }, []);
 
-  return { movieInfo };
+  return { movieInfoList };
 };

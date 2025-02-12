@@ -8,7 +8,7 @@ import { useMovie } from "./hooks/useMovie";
 
 export default function Home() {
   const { movieList, hasMore, fetchMoreData } = useMovieList();
-  const { movieInfo } = useMovie();
+  const { movieInfoList } = useMovie();
 
   return (
     <div className="w-[720px] mx-auto my-5 max-w-full px-2">
@@ -16,7 +16,11 @@ export default function Home() {
 
       <h1 className="text-2xl font-bold my-4">リクエスト作品</h1>
       <div className="grid grid-cols-1 gap-4 mt-4">
-        {movieInfo && <Item movie={movieInfo} />}
+        <div className="grid grid-cols-1 gap-4 mt-4">
+          {movieInfoList.map((movie) => (
+            <Item movie={movie} key={movie.id} />
+          ))}
+        </div>
       </div>
 
       <h1 className="text-2xl font-bold my-4">上映中作品</h1>
