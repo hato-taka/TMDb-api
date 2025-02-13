@@ -30,7 +30,7 @@ export default function RootLayout({
         <meta property="og:description" content="映画部で次に上映する作品を投票する" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://main.d27y2h250yphml.amplifyapp.com/" />
-        <meta property="og:image" content="/title.webp" />
+        <meta property="og:image" content="/title.png" />
         <meta property="og:site_name" content="映画部" />
         <meta property="og:locale" content="ja_JP" />
       </Head>
