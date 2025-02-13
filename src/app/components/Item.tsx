@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Heart } from "lucide-react";
 import { useEffect, useState } from "react";
 
+// TODO: src/app/types/movie.ts で型定義をする
 type ItemProps = {
   movie: {
     id: number;

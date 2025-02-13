@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { prisma } from "@/app/lib/prisma";
+import prisma from "@/app/lib/prisma";
 
 // GETリクエストの処理（すべての actors を取得）
 export async function GET() {

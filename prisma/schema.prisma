@@ -13,9 +13,14 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model actor {
+model Actor {
   id Int @id @default(autoincrement())
   name String
 }
 
-
+model Movie {
+  id String @id @default(uuid())
+  url String
+  title String
+  likes Int
+}

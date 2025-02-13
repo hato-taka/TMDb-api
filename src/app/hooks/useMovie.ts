@@ -27,7 +27,7 @@ export const useMovie = () => {
     ids.forEach(async (id) => {
       fetchMovie(id)
         .then((data) => {
-          console.log(data);
+          // console.log(data);
           setMovieInfoList((prev) => [...prev, data]);
         })
         .catch((error) => {
