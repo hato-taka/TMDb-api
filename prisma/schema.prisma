@@ -18,7 +18,7 @@ model Actor {
   name String
 }
 
-model Movie {
+model WishList {
   id String @id @default(uuid())
   url String
   title String
