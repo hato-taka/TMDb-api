@@ -4,11 +4,11 @@
 
 # 概要
 
-シュアハウスの住人向けのサービスである。想定ユーザー数は20名程度    
-次に見たい映画を自由に投票・追加できるwebアプリサービス
+シュアハウスの住人向けのサービスである。想定ユーザー数は 20 名程度  
+次に見たい映画を自由に投票・追加できる web アプリサービス
 
 本プロジェクトの開発の目的は、みたい映画を自由に共有できることで、住民同士の交流を促進させることを目的とする。  
-画面デザインはスマートフォンのみ対象とする。（PCでの画面レイアウトは対象外とする）
+画面デザインはスマートフォンのみ対象とする。（PC での画面レイアウトは対象外とする）
 
 ## 開発の優先順位
 
@@ -18,11 +18,33 @@
 
 # システム要件
 
+## 技術スタック
+
+### フロントエンド
+- React
+- Next.js
+- typescript
+- Tailwind CSS
+- prisma: ORMラッパー
+
+### API
+- TMDB API: 映画情報を取得 https://www.themoviedb.org/
+
+### DB
+- TiDB
+
+### デプロイ
+- AWS amplify
+
+### コード管理・ドキュメント管理
+- Github
+
+## システム構成の概要
 - Next.js と typescript で開発
-- DBはTiDBを利用する
+- DB は TiDB を利用する
 - AWS amplify でデプロイする
-- TMDBのAPIを利用して映画情報を取得する
-- DB操作はPrismaで行う
+- TMDB の API を利用して映画情報を取得する
+- DB 操作は Prisma で行う
 
 ## システム構成図
 
@@ -33,10 +55,10 @@ graph TD;
 
     %% Amplifyの動作
     subgraph "AWS Amplify (フロントエンド)"
-        AmplifyAPI["📡 API Routes<br>Next.js API"] 
+        AmplifyAPI["📡 API Routes<br>Next.js API"]
         AmplifyUI["🎨 UI Components<br>React + TailwindCSS"]
     end
-    
+
     Amplify -->|画面描画| AmplifyUI;
     Amplify -->|リクエスト処理| AmplifyAPI;
 
@@ -49,7 +71,7 @@ graph TD;
         TiDB["🛢 TiDB<br>(MySQL互換DB)"];
         Prisma["🛠 Prisma ORM"];
     end
-    
+
     AmplifyAPI -->|"DB操作: SELECT・INSERT・UPDATE"| Prisma;
     Prisma -->|"SQL クエリ送信"| TiDB;
     TiDB -->|"データ取得"| Prisma;
@@ -57,19 +79,28 @@ graph TD;
 ```
 
 # 機能要件
+
 - ユーザーが自由に「観たい映画一覧」に新しい映画を追加できる
 - ユーザーが自由に「いいね！」ボタンを押せる
 - 累計の「いいね！」数が表示される
 
 ## 機能一覧
 
+| No. | カテゴリー   | 優先度 | 要求内容                         |
+| --- | ------------ | ------ | -------------------------------- |
+| 1   | いいねボタン | 高     | ユーザーが観たい映画に投票できる |
+| 2 | 検索機能 | 高 | ユーザーが観たい映画をリストに追加できる |
+| 3 | LINEアプリとの連携 | 中 | ライン上からアプリの閲覧・操作が可能である |
+
 
 # 非機能要件
 
 ## パフォーマンス要件
+
 - ユーザー操作から画面の描画までに、著しい遅延が発生しない
 - データベースのデータの整合性が取れていること
 
 # 参考記事一覧
+
 - [要件定義書 テンプレート](https://notepm.jp/template/requirement-definition)
 - https://qiita.com/syantien/items/9a8a7cbaeca2be3ef0d7
