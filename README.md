@@ -1,5 +1,5 @@
 # 要件定義書
-https://github.com/hato-taka/TMDb-api/blob/3432bfbf179ec05f7b4ff11391e907be10d0fd7c/docs/requirements/v1.0/requirement_v1_0.md
+https://github.com/hato-taka/TMDb-api/blob/main/docs/requirements/v1.0/requirement_v1_0.md  
 に記述している
 
 
