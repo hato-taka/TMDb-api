@@ -6,8 +6,44 @@ export async function GET() {
   try {
     const movies = await prisma.wishList.findMany();
     return NextResponse.json(movies, { status: 200 });
-    // return NextResponse.json({movies: "test"}, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error: `Failed to fetch movies. ${error}` }, { status: 500 });
   }
 }
+
+// // POSTリクエストの処理（新しい movie を作成）
+// export async function POST() {
+//   try {
+//     const { title, overview, poster_path, vote_average } = await NextResponse.json();
+//     const newMovie = await prisma.wishList.create({
+//       data: {
+//         title,
+//         overview,
+//         poster_path,
+//         vote_average,
+//       },
+//     });
+//     return NextResponse.json(newMovie, { status: 201 });
+//   } catch (error) {
+//     return NextResponse.json({ error: `Failed to create a new movie. ${error}` }, { status: 500 });
+//   }
+// }
+
+// // PUTリクエストの処理（指定された movie を更新）
+// export async function PUT() {
+//   try {
+//     const { id, title, overview, poster_path, vote_average } = await NextResponse.json();
+//     const updatedMovie = await prisma.wishList.update({
+//       where: { id },
+//       data: {
+//         title,
+//         overview,
+//         poster_path,
+//         vote_average,
+//       },
+//     });
+//     return NextResponse.json(updatedMovie, { status: 200 });
+//   } catch (error) {
+//     return NextResponse.json({ error: `Failed to update the movie. ${error}` }, { status: 500 });
+//   }
+// }

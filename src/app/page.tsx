@@ -5,31 +5,10 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { useMovieList } from "./hooks/useMovieList";
 import { useMovie } from "./hooks/useMovie";
 import SearchForm from "./components/SearchForm";
-import { useEffect } from "react";
 
 export default function Home() {
   const { movieList, hasMore, fetchMoreData } = useMovieList();
   const { movieInfoList } = useMovie();
-
-
-  useEffect(() => {
-    const fetchActors = async () => {
-      try {
-        const response = await fetch("/api/movies");
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        console.log(data);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        console.log("fetch movies done");
-      }
-    };
-
-    fetchActors();
-  }, []);
 
   return (
     <div className="w-[720px] mx-auto my-5 max-w-full px-2">
