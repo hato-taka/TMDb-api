@@ -113,4 +113,4 @@ graph TD;
 # 参考記事一覧
 
 - [要件定義書 テンプレート](https://notepm.jp/template/requirement-definition)
-- https://qiita.com/syantien/items/9a8a7cbaeca2be3ef0d7
+- [要件定義書テンプレート・要件定義書の書き方](https://qiita.com/syantien/items/9a8a7cbaeca2be3ef0d7)
