@@ -25,9 +25,32 @@
 
 ```mermaid
 graph TD;
-    User["User (ブラウザ)"] -->|リクエスト| Amplify["AWS Amplify (Next.js)"];
-    Amplify -->|APIリクエスト| TMDB["TMDB API (映画情報取得)"];
-    Amplify -->|Prismaを通じてアクセス| TiDB["TiDB (データベース)"];
+    %% ユーザー
+    User["👤 User (ブラウザ)"] -->|アクセス| Amplify["🚀 AWS Amplify<br>(Next.js + TypeScript)"];
+
+    %% Amplifyの動作
+    subgraph "AWS Amplify (フロントエンド)"
+        AmplifyAPI["📡 API Routes<br>Next.js API"] 
+        AmplifyUI["🎨 UI Components<br>React + TailwindCSS"]
+    end
+    
+    Amplify -->|画面描画| AmplifyUI;
+    Amplify -->|リクエスト処理| AmplifyAPI;
+
+    %% TMDB API とのやり取り
+    AmplifyAPI -->|"映画情報取得リクエスト<br>GET movies"| TMDB["🎥 TMDB API<br>(映画データ取得)"];
+    TMDB -->|"JSONレスポンス"| AmplifyAPI;
+
+    %% データベースの操作
+    subgraph "AWS バックエンド"
+        TiDB["🛢 TiDB<br>(MySQL互換DB)"];
+        Prisma["🛠 Prisma ORM"];
+    end
+    
+    AmplifyAPI -->|"DB操作: SELECT・INSERT・UPDATE"| Prisma;
+    Prisma -->|"SQL クエリ送信"| TiDB;
+    TiDB -->|"データ取得"| Prisma;
+    Prisma -->|"JSON 形式で返却"| AmplifyAPI;
 ```
 
 # 機能要件
