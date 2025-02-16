@@ -15,6 +15,7 @@ type ItemProps = {
 
 export const Item = ({ movie }: ItemProps) => {
   const [liked, setLiked] = useState(false);
+  // TODO: likeCountをAPIから取得する
   const [likeCount, setLikeCount] = useState(0);
 
   // ローカルストレージから「いいね」の状態を取得
@@ -32,7 +33,7 @@ export const Item = ({ movie }: ItemProps) => {
     setLiked(newLiked);
     setLikeCount((prev) => (newLiked ? prev + 1 : prev - 1));
 
-    // ローカルストレージに保存
+    // ローカルストレージに保存 → todo: APIに保存する
     const storedLikes = JSON.parse(localStorage.getItem("likes") || "{}");
     storedLikes[movie.id] = newLiked ? likeCount + 1 : likeCount - 1;
     localStorage.setItem("likes", JSON.stringify(storedLikes));
