@@ -83,7 +83,7 @@ graph TD;
     User["👤 User (ブラウザ)"] -->|アクセス| Amplify["🚀 AWS Amplify<br>(Next.js + TypeScript)"];
 
     %% Amplifyの動作
-    subgraph "AWS Amplify (フロントエンド)"
+    subgraph "フロントエンド"
         AmplifyAPI["📡 API Routes<br>Next.js API"]
         AmplifyUI["🎨 UI Components<br>React + TailwindCSS"]
     end
@@ -92,11 +92,11 @@ graph TD;
     Amplify -->|リクエスト処理| AmplifyAPI;
 
     %% TMDB API とのやり取り
-    AmplifyAPI -->|"映画情報取得リクエスト<br>GET movies"| TMDB["🎥 TMDB API<br>(映画データ取得)"];
+    AmplifyAPI -->|"映画情報取得リクエスト<br>GET /movies"| TMDB["🎥 TMDB API<br>(映画データ取得)"];
     TMDB -->|"JSONレスポンス"| AmplifyAPI;
 
     %% データベースの操作
-    subgraph "AWS バックエンド"
+    subgraph "バックエンド"
         TiDB["🛢 TiDB<br>(MySQL互換DB)"];
         Prisma["🛠 Prisma ORM"];
     end
