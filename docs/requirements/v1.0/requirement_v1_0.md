@@ -73,6 +73,7 @@ https://github.com/hato-taka/TMDb-api/blob/main/docs/requirements/v1.0/mock-up.p
 - AWS amplify でデプロイする
 - TMDB の API を利用して映画情報を取得する
 - DB 操作は Prisma で行う
+- Gitはmainブランチとdevブランチに分け、devブランチで動作確認後、mainブランチへマージする
 
 ## システム構成図
 
@@ -104,6 +105,14 @@ graph TD;
     Prisma -->|"SQL クエリ送信"| TiDB;
     TiDB -->|"データ取得"| Prisma;
     Prisma -->|"JSON 形式で返却"| AmplifyAPI;
+
+    %% Git のブランチ管理
+    subgraph "Git ブランチ管理"
+        DevBranch["🌿 dev ブランチ<br>(動作確認用)"]
+        MainBranch["🌳 main ブランチ<br>(本番環境)"]
+    end
+
+    DevBranch -->|"動作確認後マージ"| MainBranch;
 ```
 
 # 機能要件
