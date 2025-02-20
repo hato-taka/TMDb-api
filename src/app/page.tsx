@@ -12,6 +12,7 @@ export default function Home() {
 
   return (
     <div className="w-[720px] mx-auto my-5 max-w-full px-2">
+      <h1 className="text-2xl font-bold my-4">作品検索</h1>
       <SearchForm />
 
       <h1 className="text-2xl font-bold my-4">リクエスト作品</h1>
