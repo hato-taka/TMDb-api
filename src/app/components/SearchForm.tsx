@@ -29,6 +29,8 @@ const SearchForm: React.FC = () => {
         } catch (error) {
           console.error("検索エラー:", error);
         }
+      } else {
+        setResults([]);
       }
     };
 
