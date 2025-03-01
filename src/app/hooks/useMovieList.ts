@@ -4,6 +4,13 @@ import { MovieResponse } from '../types/movie';
 const BASE_URL = process.env.NEXT_PUBLIC_TMDB_BASE_URL;
 const API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY;
 
+/**
+ * 現在上映中の映画一覧を取得するカスタムフック
+ * @returns
+ * - movieList: 現在上映中の映画一覧
+ * - hasMore: まだデータがあるかどうか
+ * - fetchMoreData: データを追加で取得する関数
+ */
 export const useMovieList = () => {
   const [movieList, setMovieList] = useState<MovieResponse[]>([]);
   const [hasMore, setHasMore] = useState(true);

@@ -6,16 +6,23 @@
 
 generator client {
   provider = "prisma-client-js"
+  binaryTargets = ["native", "rhel-openssl-1.0.x"]
 }
 
 datasource db {
   provider = "mysql"
-  url      = env("DATABASE_URL")
+  // TODO: env("DATABASE_URL") に変更する
+  url      = env("DATABASE_URL_DEV")
 }
 
-model actor {
+model Actor {
   id Int @id @default(autoincrement())
   name String
 }
 
-
+model WishList {
+  id String @id @default(uuid())
+  movieId String
+  title String
+  likes Int
+}

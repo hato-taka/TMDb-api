@@ -11,8 +11,10 @@ https://github.com/hato-taka/TMDb-api/blob/main/docs/requirements/v1.0/requireme
 - [ ] LINEでOGPを表示させる
 - [x] dev環境のセットアップ
 - [ ] DBでデータの永続化
-- [ ] 検索機能
-- [ ] 検索文字が2文字以下になったら、画面を消す
+- [x] テスト用のDBを立てる
+- [x] 検索機能
+- [x] 検索文字が2文字以下になったら、画面を消す
+
 
 # 利用API
 https://www.themoviedb.org/u/hato_code

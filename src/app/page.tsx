@@ -19,7 +19,7 @@ export default function Home() {
       <div className="grid grid-cols-1 gap-4 mt-4">
         <div className="grid grid-cols-1 gap-4 mt-4">
           {movieInfoList.map((movie) => (
-            <Item movie={movie} key={movie.id} />
+            <Item movie={{ ...movie, movieId: movie.id }} key={movie.id} />
           ))}
         </div>
       </div>
@@ -36,7 +36,7 @@ export default function Home() {
       >
         <div className="grid grid-cols-1 gap-4 mt-4">
           {movieList.map((movie) => (
-            <Item movie={movie} key={movie.id} />
+            <Item movie={{ ...movie, movieId: movie.id }} key={movie.id} />
           ))}
         </div>
       </InfiniteScroll>

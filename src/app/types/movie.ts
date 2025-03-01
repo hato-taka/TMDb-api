@@ -1,8 +1,14 @@
 // types/movie.ts
+// TODO: id と movieId はどう違うのか
+// id: データベースの ID(UUID)
+// movieId: TMDB API の ID
 export interface Movie {
-  id: number;
+  id: string;
+  movieId: string;
   title: string;
   poster_path: string | null;
+  overview: string;
+  vote_average: number;
   release_date?: string;
 }
 
@@ -16,7 +22,7 @@ export type MovieResponse = {
   adult: boolean;
   backdrop_path: string;
   genre_ids: number[];
-  id: number;
+  id: string;
   original_language: string;
   original_title: string;
   overview: string;
