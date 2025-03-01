@@ -1,31 +1,29 @@
 import Image from "next/image";
-import { Heart } from "lucide-react";
+import { Heart, Plus } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Movie } from "../types/movie";
+import axios from "axios";
 
 // TODO: src/app/types/movie.ts で型定義をする
 type ItemProps = {
-  movie: {
-    id: number;
-    title: string;
-    overview: string;
-    poster_path: string;
-    vote_average: number;
-  };
+  movie: Movie;
+  hasAddButton?: boolean;
 };
 
-export const Item = ({ movie }: ItemProps) => {
+export const Item = ({ movie, hasAddButton = false }: ItemProps) => {
   const [liked, setLiked] = useState(false);
+  const [isAdded, setIsAdded] = useState(false);
   // TODO: likeCountをAPIから取得する
   const [likeCount, setLikeCount] = useState(0);
 
   // ローカルストレージから「いいね」の状態を取得
   useEffect(() => {
     const storedLikes = JSON.parse(localStorage.getItem("likes") || "{}");
-    if (storedLikes[movie.id]) {
+    if (storedLikes[movie.movieId]) {
       setLiked(true);
-      setLikeCount(storedLikes[movie.id]);
+      setLikeCount(storedLikes[movie.movieId]);
     }
-  }, [movie.id]);
+  }, [movie.movieId]);
 
   // いいねの切り替え
   const toggleLike = () => {
@@ -39,10 +37,26 @@ export const Item = ({ movie }: ItemProps) => {
     localStorage.setItem("likes", JSON.stringify(storedLikes));
   };
 
+  const postMovie = async (movieId: string, title: string) => {
+    console.log(movieId, title);
+    console.log(typeof movieId);
+    try {
+      const response = await axios.post("/api/movies", {
+        id: crypto.randomUUID(),
+        movieId: movieId.toString(),
+        title,
+      });
+      setIsAdded(true);
+      console.log(response.data);
+    } catch (error) {
+      console.error("投稿エラー:", error);
+    }
+  };
+
   return (
     <>
       <div key={movie.id} className="bg-gray-800 p-4 rounded flex">
-        <div onClick={toggleLike} className="relative">
+        <div className="relative">
           <Image
             src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
             alt={movie.title}
@@ -51,20 +65,39 @@ export const Item = ({ movie }: ItemProps) => {
             className="rounded w-full object-cover"
             unoptimized
           />
-          <button className="flex items-center gap-2 p-2 border rounded-lg shadow-md mt-3 bg-gray-800">
-            <Heart
-              size={20}
-              className={liked ? "text-red-500 fill-red-500" : "text-gray-500"}
-            />
-            <span>{likeCount}</span>
-          </button>
+          <div className="flex gap-2 ">
+            <button
+              onClick={toggleLike}
+              className="flex items-center gap-2 p-2 border rounded-lg shadow-md mt-3 bg-gray-800"
+            >
+              <Heart
+                size={20}
+                className={
+                  liked ? "text-red-500 fill-red-500" : "text-gray-500"
+                }
+              />
+              <span>{likeCount}</span>
+            </button>
+            {hasAddButton && (
+              <button
+                className={`items-center gap-2 p-2 border rounded-lg shadow-md mt-3 ${
+                  isAdded ? "bg-red-500" : "bg-gray-800"
+                }`}
+                onClick={() => {
+                  postMovie(movie.id, movie.title);
+                }}
+              >
+                <Plus className="w-5 h-5" />
+              </button>
+            )}
+          </div>
         </div>
         <div className="ml-4 w-full">
           <h2 className="text-lg font-bold">{movie.title}</h2>
           <p className="text-sm text-gray-400">
             {movie.overview.length > 100
-            ? `${movie.overview.substring(0, 100)}...`
-            : movie.overview}
+              ? `${movie.overview.substring(0, 100)}...`
+              : movie.overview}
           </p>
         </div>
       </div>

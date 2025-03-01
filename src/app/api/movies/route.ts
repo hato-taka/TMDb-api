@@ -7,27 +7,43 @@ export async function GET() {
     const movies = await prisma.wishList.findMany();
     return NextResponse.json(movies, { status: 200 });
   } catch (error) {
-    return NextResponse.json({ error: `Failed to fetch movies. ${error}` }, { status: 500 });
+    return NextResponse.json(
+      { error: `Failed to fetch movies. ${error}` },
+      { status: 500 }
+    );
   }
 }
 
-// // POSTリクエストの処理（新しい movie を作成）
-// export async function POST() {
-//   try {
-//     const { title, overview, poster_path, vote_average } = await NextResponse.json();
-//     const newMovie = await prisma.wishList.create({
-//       data: {
-//         title,
-//         overview,
-//         poster_path,
-//         vote_average,
-//       },
-//     });
-//     return NextResponse.json(newMovie, { status: 201 });
-//   } catch (error) {
-//     return NextResponse.json({ error: `Failed to create a new movie. ${error}` }, { status: 500 });
-//   }
-// }
+// POSTリクエストの処理（新しい movie を作成）
+export async function POST(req: Request) {
+  const body = await req.json();
+  const { id, movieId, title } = body;
+  console.log(body);
+
+  if (!movieId || !title) {
+    return NextResponse.json(
+      { error: "Missing required fields" },
+      { status: 400 }
+    );
+  }
+
+  try {
+    const newMovie = await prisma.wishList.create({
+      data: {
+        id,
+        movieId,
+        title,
+        likes: 0,
+      },
+    });
+    return NextResponse.json(newMovie, { status: 201 });
+  } catch (error) {
+    return NextResponse.json(
+      { error: `Failed to create a new movie. ${error}` },
+      { status: 500 }
+    );
+  }
+}
 
 // // PUTリクエストの処理（指定された movie を更新）
 // export async function PUT() {

@@ -11,7 +11,8 @@ generator client {
 
 datasource db {
   provider = "mysql"
-  url      = env("DATABASE_URL")
+  // TODO: env("DATABASE_URL") に変更する
+  url      = env("DATABASE_URL_DEV")
 }
 
 model Actor {
@@ -21,7 +22,7 @@ model Actor {
 
 model WishList {
   id String @id @default(uuid())
-  url String
+  movieId String
   title String
   likes Int
 }

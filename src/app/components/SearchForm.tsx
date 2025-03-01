@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Movie, SearchResponse } from "../types/movie";
+import { Item } from "./Item";
 
 const SearchForm: React.FC = () => {
   const [query, setQuery] = useState<string>("");
@@ -23,6 +24,7 @@ const SearchForm: React.FC = () => {
               },
             }
           );
+          console.log(response.data.results);
           setResults(response.data.results);
         } catch (error) {
           console.error("検索エラー:", error);
@@ -49,20 +51,10 @@ const SearchForm: React.FC = () => {
         className="p-2 border rounded w-full text-black"
       />
 
-      <div className="mt-4 grid grid-cols-1 gap-4">
+      <div>
         {results.map((movie: Movie) => (
-          <div key={movie.id} className="border p-2 rounded flex">
-            <img
-              src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
-              alt={movie.title}
-              className="h-48 object-contain"
-            />
-            <div className="ml-5">
-              <h3 className="font-bold mt-2">{movie.title}</h3>
-              <p className="text-sm text-gray-600">
-                {movie.release_date?.split("-")[0]}
-              </p>
-            </div>
+          <div key={movie.id} className="p-2 rounded">
+            <Item movie={movie} key={movie.id} hasAddButton={true} />
           </div>
         ))}
       </div>

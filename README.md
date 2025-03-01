@@ -4,8 +4,9 @@
 - [x] ページタイトルの変更
 - [x] OGPの追加
 - [ ] LINEでOGPを表示させる
-- [ ] dev環境のセットアップ
+- [x] dev環境のセットアップ
 - [ ] DBでデータの永続化
+- [ ] テスト用のDBを立てる
 
 # 利用API
 https://www.themoviedb.org/u/hato_code
