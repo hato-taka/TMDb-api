@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Heart, Plus } from "lucide-react";
+import { Heart, Plus, Check } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Movie } from "../types/movie";
 import axios from "axios";
@@ -87,7 +87,11 @@ export const Item = ({ movie, hasAddButton = false }: ItemProps) => {
                   postMovie(movie.id, movie.title);
                 }}
               >
-                <Plus className="w-5 h-5" />
+                {isAdded ? (
+                  <Check className="w-5 h-5" />
+                ) : (
+                  <Plus className="w-5 h-5" />
+                )}
               </button>
             )}
           </div>
