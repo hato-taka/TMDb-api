@@ -10,6 +10,7 @@ export interface Movie {
   overview: string;
   vote_average: number;
   release_date?: string;
+  likes: number;
 }
 
 export interface SearchResponse {
@@ -33,4 +34,6 @@ export type MovieResponse = {
   video: boolean;
   vote_average: number;
   vote_count: number;
+  movieId: string;
+  likes?: number;
 };

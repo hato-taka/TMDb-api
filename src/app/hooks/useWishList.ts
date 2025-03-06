@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { WishList } from "../types/wishList";
 
+// DBから取得したデータを格納する
 export const useWishList = () => {
   const [wishList, setWishList] = useState<WishList[]>([]);
   const fetchWishList = async () => {
