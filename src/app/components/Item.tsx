@@ -14,7 +14,7 @@ export const Item = ({ movie, hasAddButton = false }: ItemProps) => {
   const [liked, setLiked] = useState(false);
   const [isAdded, setIsAdded] = useState(false);
   // TODO: likeCountをAPIから取得する
-  const [likeCount, setLikeCount] = useState(0);
+  const [likeCount, setLikeCount] = useState(movie.likes);
 
   // ローカルストレージから「いいね」の状態を取得
   useEffect(() => {
@@ -33,10 +33,13 @@ export const Item = ({ movie, hasAddButton = false }: ItemProps) => {
 
     // ローカルストレージに保存 → todo: APIに保存する
     const storedLikes = JSON.parse(localStorage.getItem("likes") || "{}");
-    storedLikes[movie.id] = newLiked ? likeCount + 1 : likeCount - 1;
+    storedLikes[movie.movieId] = newLiked ? likeCount + 1 : likeCount - 1;
     localStorage.setItem("likes", JSON.stringify(storedLikes));
+
+    updateMovie(movie.id, likeCount);
   };
 
+  // TODO: hooksに移動させる
   const postMovie = async (movieId: string, title: string) => {
     console.log(movieId, title);
     console.log(typeof movieId);
@@ -53,6 +56,20 @@ export const Item = ({ movie, hasAddButton = false }: ItemProps) => {
     }
   };
 
+  const updateMovie = async (id: string, likes: number) => {
+    console.log(id, likes);
+    try {
+      const response = await axios.put("/api/movies", {
+        id: id.toString(),
+        movieId: movie.movieId.toString(),
+        likes: likeCount,
+      });
+      console.log(response.data);
+    } catch (error) {
+      console.error("更新エラー:", error);
+    }
+  };
+
   return (
     <>
       <div key={movie.id} className="bg-gray-800 p-4 rounded flex">
@@ -66,18 +83,21 @@ export const Item = ({ movie, hasAddButton = false }: ItemProps) => {
             unoptimized
           />
           <div className="flex gap-2 ">
-            <button
-              onClick={toggleLike}
-              className="flex items-center gap-2 p-2 border rounded-lg shadow-md mt-3 bg-gray-800"
-            >
-              <Heart
-                size={20}
-                className={
-                  liked ? "text-red-500 fill-red-500" : "text-gray-500"
-                }
-              />
-              <span>{likeCount}</span>
-            </button>
+            {/* いいねボタン */}
+            {!hasAddButton && (
+              <button
+                onClick={toggleLike}
+                className="flex items-center gap-2 p-2 border rounded-lg shadow-md mt-3 bg-gray-800"
+              >
+                <Heart
+                  size={20}
+                  className={
+                    liked ? "text-red-500 fill-red-500" : "text-gray-500"
+                  }
+                />
+                <span>{likeCount}</span>
+              </button>
+            )}
             {hasAddButton && (
               <button
                 className={`items-center gap-2 p-2 border rounded-lg shadow-md mt-3 ${
@@ -99,7 +119,7 @@ export const Item = ({ movie, hasAddButton = false }: ItemProps) => {
         <div className="ml-4 w-full">
           <h2 className="text-lg font-bold">{movie.title}</h2>
           <p className="text-sm text-gray-400">
-            {movie.overview.length > 100
+            {movie.overview?.length > 100
               ? `${movie.overview.substring(0, 100)}...`
               : movie.overview}
           </p>

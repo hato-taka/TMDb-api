@@ -46,20 +46,28 @@ export async function POST(req: Request) {
 }
 
 // // PUTリクエストの処理（指定された movie を更新）
-// export async function PUT() {
-//   try {
-//     const { id, title, overview, poster_path, vote_average } = await NextResponse.json();
-//     const updatedMovie = await prisma.wishList.update({
-//       where: { id },
-//       data: {
-//         title,
-//         overview,
-//         poster_path,
-//         vote_average,
-//       },
-//     });
-//     return NextResponse.json(updatedMovie, { status: 200 });
-//   } catch (error) {
-//     return NextResponse.json({ error: `Failed to update the movie. ${error}` }, { status: 500 });
-//   }
-// }
+export async function PUT(req: Request) {
+  const body = await req.json();
+  const {id, movieId, likes } = body;
+
+  if (!movieId) {
+    return NextResponse.json(
+      { error: "Missing required fields" },
+      { status: 400 }
+    );
+  }
+
+  try {
+    const updatedMovie = await prisma.wishList.update({
+      where: { id },
+      data: { likes },
+    });
+    return NextResponse.json(updatedMovie, { status: 200 });
+  } catch (error) {
+    return NextResponse.json(
+      { error: `Failed to update the movie. ${error}` },
+      { status: 500 }
+    );
+  }
+
+}

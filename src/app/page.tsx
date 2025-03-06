@@ -5,10 +5,13 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { useMovieList } from "./hooks/useMovieList";
 import { useMovie } from "./hooks/useMovie";
 import SearchForm from "./components/SearchForm";
+import { useWishList } from "./hooks/useWishList";
 
 export default function Home() {
   const { movieList, hasMore, fetchMoreData } = useMovieList();
   const { movieInfoList } = useMovie();
+  const { wishList } = useWishList();
+  console.log(wishList);
 
   return (
     <div className="w-[720px] mx-auto my-5 max-w-full px-2">
@@ -18,8 +21,8 @@ export default function Home() {
       <h1 className="text-2xl font-bold my-4">リクエスト作品</h1>
       <div className="grid grid-cols-1 gap-4 mt-4">
         <div className="grid grid-cols-1 gap-4 mt-4">
-          {movieInfoList.map((movie) => (
-            <Item movie={{ ...movie, movieId: movie.id }} key={movie.id} />
+          {movieInfoList.map((movie, index) => (
+            <Item movie={{ ...movie, movieId: movie.movieId, likes: movie.likes ?? 0 }} key={`${movie.id}${index}`} />
           ))}
         </div>
       </div>
@@ -36,7 +39,7 @@ export default function Home() {
       >
         <div className="grid grid-cols-1 gap-4 mt-4">
           {movieList.map((movie) => (
-            <Item movie={{ ...movie, movieId: movie.id }} key={movie.id} />
+            <Item movie={{ ...movie, movieId: movie.id, likes :0 }} key={movie.id} hasAddButton={true}/>
           ))}
         </div>
       </InfiniteScroll>
