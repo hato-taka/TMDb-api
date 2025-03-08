@@ -3,6 +3,7 @@ import { Heart, Plus, Check } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Movie } from "../types/movie";
 import axios from "axios";
+import Link from "next/link";
 
 // TODO: src/app/types/movie.ts で型定義をする
 type ItemProps = {
@@ -68,6 +69,8 @@ export const Item = ({ movie, hasAddButton = false }: ItemProps) => {
     }
   };
 
+  console.log(movie.homepage);
+
   return (
     <>
       <div key={movie.id} className="bg-gray-800 p-4 rounded flex">
@@ -121,6 +124,9 @@ export const Item = ({ movie, hasAddButton = false }: ItemProps) => {
               ? `${movie.overview.substring(0, 100)}...`
               : movie.overview}
           </p>
+          {movie.homepage && (
+          <p className="mt-4 text-blue-400"><Link href={movie.homepage}>公式サイト</Link></p>
+          )}
         </div>
       </div>
     </>

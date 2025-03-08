@@ -18,6 +18,7 @@ export const useMovie = () => {
     }
 
     const data = await response.json();
+    console.log(data.homepage);
     return {...data, id, movieId, likes};
   };
 
