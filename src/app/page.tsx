@@ -5,13 +5,12 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { useMovieList } from "./hooks/useMovieList";
 import { useMovie } from "./hooks/useMovie";
 import SearchForm from "./components/SearchForm";
-import { useWishList } from "./hooks/useWishList";
+// import { useWishList } from "./hooks/useWishList";
 
 export default function Home() {
   const { movieList, hasMore, fetchMoreData } = useMovieList();
   const { movieInfoList } = useMovie();
-  const { wishList } = useWishList();
-  console.log(wishList);
+  // const { wishList } = useWishList();
 
   return (
     <div className="w-[720px] mx-auto my-5 max-w-full px-2">

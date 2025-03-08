@@ -41,8 +41,6 @@ export const Item = ({ movie, hasAddButton = false }: ItemProps) => {
 
   // TODO: hooksに移動させる
   const postMovie = async (movieId: string, title: string) => {
-    console.log(movieId, title);
-    console.log(typeof movieId);
     try {
       const response = await axios.post("/api/movies", {
         id: crypto.randomUUID(),
@@ -50,7 +48,7 @@ export const Item = ({ movie, hasAddButton = false }: ItemProps) => {
         title,
       });
       setIsAdded(true);
-      console.log(response.data);
+      console.log("投稿成功:", response);
     } catch (error) {
       console.error("投稿エラー:", error);
     }
@@ -62,9 +60,9 @@ export const Item = ({ movie, hasAddButton = false }: ItemProps) => {
       const response = await axios.put("/api/movies", {
         id: id.toString(),
         movieId: movie.movieId.toString(),
-        likes: likeCount,
+        likes,
       });
-      console.log(response.data);
+      console.log("更新成功:", response);
     } catch (error) {
       console.error("更新エラー:", error);
     }

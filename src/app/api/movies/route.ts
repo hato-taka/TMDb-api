@@ -18,7 +18,6 @@ export async function GET() {
 export async function POST(req: Request) {
   const body = await req.json();
   const { id, movieId, title } = body;
-  console.log(body);
 
   if (!movieId || !title) {
     return NextResponse.json(
