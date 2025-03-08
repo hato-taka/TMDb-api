@@ -18,7 +18,7 @@ export const useMovie = () => {
     }
 
     const data = await response.json();
-    console.log("fetchMovie", data);
+    console.log(data.homepage);
     return {...data, id, movieId, likes};
   };
 
@@ -30,7 +30,6 @@ export const useMovie = () => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const wishMovies = await response.json();
-      console.log(wishMovies);
 
       const moviePromises = wishMovies.map((movie: WishList) => fetchMovie(movie.id, movie.movieId, movie.likes));
       const movies = await Promise.all(moviePromises);

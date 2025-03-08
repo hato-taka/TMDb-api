@@ -12,7 +12,6 @@ export const useWishList = () => {
       }
       const data = await response.json();
       setWishList(data);
-      // console.log(data);
     } catch (error) {
       console.error(error);
     } finally {

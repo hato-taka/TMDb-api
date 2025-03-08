@@ -33,7 +33,6 @@ export const useMovieList = () => {
   useEffect(() => {
     fetchMovies(1)
       .then((data) => {
-        console.log(data);
         setMovieList(data.results);
         setTotalPages(data.total_pages);
       })
@@ -53,7 +52,6 @@ export const useMovieList = () => {
       setPage(nextPage);
 
       const data = await fetchMovies(nextPage);
-      console.log(data);
       setMovieList((prevMovies) => [...prevMovies, ...data.results]);
     } catch (error) {
       console.log(error);
