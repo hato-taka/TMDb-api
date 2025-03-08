@@ -90,7 +90,7 @@ generator client {
 
 datasource db {
   provider = "mysql"
-  url      = env("DATABASE_URL")
+  url      = env("NEXT_PUBLIC_DATABASE_URL")
 }
 ```
 
@@ -101,7 +101,7 @@ npx prisma generate
 
 ### TiDB Cloud のエンドポイント情報
 ```.env
-DATABASE_URL="mysql://<username>:<password>@<host>:<port>/<database>?sslaccept=strict"
+NEXT_PUBLIC_DATABASE_URL="mysql://<username>:<password>@<host>:<port>/<database>?sslaccept=strict"
 ```
 
 
