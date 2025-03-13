@@ -118,7 +118,7 @@ export const Item = ({ movie, hasAddButton = false }: ItemProps) => {
           </div>
         </div>
         <div className="ml-4 w-full">
-          <h2 className="text-lg font-bold">{movie.title}</h2>
+          <h2 className="text-lg font-bold text-white">{movie.title}</h2>
           <p className="text-sm text-gray-400">
             {movie.overview?.length > 100
               ? `${movie.overview.substring(0, 100)}...`
