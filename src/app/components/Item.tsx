@@ -29,15 +29,16 @@ export const Item = ({ movie, hasAddButton = false }: ItemProps) => {
   // いいねの切り替え
   const toggleLike = () => {
     const newLiked = !liked;
+    const newLikeCount = newLiked ? likeCount + 1 : likeCount - 1;
     setLiked(newLiked);
-    setLikeCount((prev) => (newLiked ? prev + 1 : prev - 1));
+    setLikeCount(newLikeCount);
 
     // ローカルストレージに保存 → todo: APIに保存する
     const storedLikes = JSON.parse(localStorage.getItem("likes") || "{}");
-    storedLikes[movie.movieId] = newLiked ? likeCount + 1 : likeCount - 1;
+    storedLikes[movie.movieId] = newLikeCount;
     localStorage.setItem("likes", JSON.stringify(storedLikes));
 
-    updateMovie(movie.id, likeCount);
+    updateMovie(movie.id, newLikeCount);
   };
 
   // TODO: hooksに移動させる
