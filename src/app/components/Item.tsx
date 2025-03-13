@@ -111,7 +111,10 @@ export const Item = ({ movie, hasAddButton = false }: ItemProps) => {
                 {isAdded ? (
                   <Check className="w-5 h-5" />
                 ) : (
-                  <Plus className="w-5 h-5" />
+                  <div className="flex items-center">
+                    <Plus className="w-5 h-5" />
+                    <p className="ml-1">追加</p>
+                  </div>
                 )}
               </button>
             )}
