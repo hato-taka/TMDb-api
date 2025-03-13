@@ -22,7 +22,6 @@ export const Item = ({ movie, hasAddButton = false }: ItemProps) => {
     const storedLikes = JSON.parse(localStorage.getItem("likes") || "{}");
     if (storedLikes[movie.movieId]) {
       setLiked(true);
-      setLikeCount(storedLikes[movie.movieId]);
     }
   }, [movie.movieId]);
 
@@ -35,7 +34,7 @@ export const Item = ({ movie, hasAddButton = false }: ItemProps) => {
 
     // ローカルストレージに保存 → todo: APIに保存する
     const storedLikes = JSON.parse(localStorage.getItem("likes") || "{}");
-    storedLikes[movie.movieId] = newLikeCount;
+    storedLikes[movie.movieId] = newLiked;
     localStorage.setItem("likes", JSON.stringify(storedLikes));
 
     updateMovie(movie.id, newLikeCount);
@@ -43,6 +42,10 @@ export const Item = ({ movie, hasAddButton = false }: ItemProps) => {
 
   // TODO: hooksに移動させる
   const postMovie = async (movieId: string, title: string) => {
+    if (isAdded) {
+      return;
+    }
+
     try {
       const response = await axios.post("/api/movies", {
         id: crypto.randomUUID(),
@@ -70,14 +73,18 @@ export const Item = ({ movie, hasAddButton = false }: ItemProps) => {
     }
   };
 
-  console.log(movie.homepage);
+  // console.log(movie.homepage);
 
   return (
     <>
       <div key={movie.id} className="bg-gray-800 p-4 rounded flex">
         <div className="relative">
           <Image
-            src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+            src={
+              movie.poster_path
+                ? `https://image.tmdb.org/t/p/w200${movie.poster_path}`
+                : "/no_image_tate.jpg"
+            }
             alt={movie.title}
             width={200}
             height={300}
@@ -110,7 +117,10 @@ export const Item = ({ movie, hasAddButton = false }: ItemProps) => {
                 }}
               >
                 {isAdded ? (
-                  <Check className="w-5 h-5" />
+                  <div className="flex items-center">
+                    <Check className="w-5 h-5" />
+                    <p className="ml-1">追加済</p>
+                  </div>
                 ) : (
                   <div className="flex items-center">
                     <Plus className="w-5 h-5" />
@@ -129,7 +139,9 @@ export const Item = ({ movie, hasAddButton = false }: ItemProps) => {
               : movie.overview}
           </p>
           {movie.homepage && (
-          <p className="mt-4 text-blue-400"><Link href={movie.homepage}>公式サイト</Link></p>
+            <p className="mt-4 text-blue-400">
+              <Link href={movie.homepage}>公式サイト</Link>
+            </p>
           )}
         </div>
       </div>
