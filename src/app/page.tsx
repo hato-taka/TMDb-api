@@ -26,7 +26,8 @@ export default function Home() {
         </div>
       </div>
 
-      <h1 className="text-2xl font-bold my-4">上映中作品</h1>
+      <hr className="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"/>
+      <h1 className="text-2xl font-bold mt-10">上映中作品</h1>
       <InfiniteScroll
         dataLength={movieList.length} // 現在のアイテム数
         next={fetchMoreData} // 次のデータをロードする関数
