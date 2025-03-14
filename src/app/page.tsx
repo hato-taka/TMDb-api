@@ -5,12 +5,11 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { useMovieList } from "./hooks/useMovieList";
 import { useMovie } from "./hooks/useMovie";
 import SearchForm from "./components/SearchForm";
-// import { useWishList } from "./hooks/useWishList";
 
 export default function Home() {
   const { movieList, hasMore, fetchMoreData } = useMovieList();
+  // TODO: isLoading の状態を追加する
   const { movieInfoList } = useMovie();
-  // const { wishList } = useWishList();
 
   return (
     <div className="w-[720px] mx-auto my-5 max-w-full px-2">
@@ -25,6 +24,7 @@ export default function Home() {
           ))}
         </div>
       </div>
+      <p className="my-8">リクエスト作品の削除はシロに連絡ください！</p>
 
       <hr className="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"/>
       <h1 className="text-2xl font-bold mt-10">上映中作品</h1>
