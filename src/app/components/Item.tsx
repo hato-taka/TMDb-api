@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Heart, Plus, Check } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Movie } from "../types/movie";
 import axios from "axios";
 import Link from "next/link";
@@ -17,13 +17,13 @@ export const Item = ({ movie, hasAddButton = false }: ItemProps) => {
   // TODO: likeCountをAPIから取得する
   const [likeCount, setLikeCount] = useState(movie.likes);
 
-  // ローカルストレージから「いいね」の状態を取得
-  useEffect(() => {
-    const storedLikes = JSON.parse(localStorage.getItem("likes") || "{}");
-    if (storedLikes[movie.movieId]) {
-      setLiked(true);
-    }
-  }, [movie.movieId]);
+  // ローカルストレージから「いいね」の状態を取得 → todo: 検討中
+  // useEffect(() => {
+    // const storedLikes = JSON.parse(localStorage.getItem("likes") || "{}");
+    // if (storedLikes[movie.movieId]) {
+    //   setLiked(true);
+    // }
+  // }, [movie.movieId]);
 
   // いいねの切り替え
   const toggleLike = () => {
