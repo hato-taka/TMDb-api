@@ -152,7 +152,7 @@ export const Item = ({ movie, hasAddButton = false }: ItemProps) => {
             )}
           </div>
         </div>
-        <div className="ml-4 w-full">
+        <div className="ml-4 w-full relative">
           <h2 className="text-lg font-bold text-white">{movie.title}</h2>
           <p className="text-sm text-gray-400">
             {movie.overview?.length > 100
@@ -167,7 +167,7 @@ export const Item = ({ movie, hasAddButton = false }: ItemProps) => {
 
           {/* 削除ボタン */}
           {!hasAddButton && (
-            <div>
+            <div className="absolute bottom-0 right-0">
               <button
                 className="text-gray-400 mr-0 ml-auto block"
                 onClick={handleDeleteClick}
