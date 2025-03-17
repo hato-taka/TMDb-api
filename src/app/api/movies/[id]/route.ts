@@ -8,20 +8,20 @@ import prisma from "@/app/lib/prisma";
 //     { params }: { params: { id: string } }
 //   ) {
 //     const { id } = params;
-  
+
 //     if (!id) {
 //       return NextResponse.json({ error: "ID is required" }, { status: 400 });
 //     }
-  
+
 //     try {
 //       const movie = await prisma.wishList.findUnique({
 //         where: { id },
 //       });
-  
+
 //       if (!movie) {
 //         return NextResponse.json({ error: "Movie not found" }, { status: 404 });
 //       }
-  
+
 //       return NextResponse.json(movie, { status: 200 });
 //     } catch (error) {
 //       return NextResponse.json(
@@ -36,7 +36,7 @@ export async function DELETE(
   request: Request,
   { params }: { params: { id: string } }
 ) {
-  const { id } = params;
+  const { id } = await params;
 
   if (!id) {
     return NextResponse.json({ error: "ID is required" }, { status: 400 });
