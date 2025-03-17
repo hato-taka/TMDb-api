@@ -44,7 +44,7 @@ export async function POST(req: Request) {
   }
 }
 
-// // PUTリクエストの処理（指定された movie を更新）
+// PUTリクエストの処理（指定された movie を更新）
 export async function PUT(req: Request) {
   const body = await req.json();
   const {id, movieId, likes } = body;
@@ -68,5 +68,4 @@ export async function PUT(req: Request) {
       { status: 500 }
     );
   }
-
 }
