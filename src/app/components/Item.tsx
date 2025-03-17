@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Movie } from "../types/movie";
 import axios from "axios";
 import Link from "next/link";
+import Modal from "./Modal";
 
 // TODO: src/app/types/movie.ts で型定義をする
 type ItemProps = {
@@ -19,10 +20,10 @@ export const Item = ({ movie, hasAddButton = false }: ItemProps) => {
 
   // ローカルストレージから「いいね」の状態を取得 → todo: 検討中
   // useEffect(() => {
-    // const storedLikes = JSON.parse(localStorage.getItem("likes") || "{}");
-    // if (storedLikes[movie.movieId]) {
-    //   setLiked(true);
-    // }
+  // const storedLikes = JSON.parse(localStorage.getItem("likes") || "{}");
+  // if (storedLikes[movie.movieId]) {
+  //   setLiked(true);
+  // }
   // }, [movie.movieId]);
 
   // いいねの切り替え
@@ -73,7 +74,27 @@ export const Item = ({ movie, hasAddButton = false }: ItemProps) => {
     }
   };
 
-  // console.log(movie.homepage);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleDeleteClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleConfirmDelete = async (id: string) => {
+    try {
+      const response = await axios.delete(`/api/movies/${id}`);
+      console.log("削除成功:", response);
+      window.location.reload(); // ページをリロード
+    } catch (error) {
+      console.error("削除エラー:", error);
+    } finally {
+      setIsModalOpen(false);
+    }
+  };
 
   return (
     <>
@@ -142,6 +163,24 @@ export const Item = ({ movie, hasAddButton = false }: ItemProps) => {
             <p className="mt-4 text-blue-400">
               <Link href={movie.homepage}>公式サイト</Link>
             </p>
+          )}
+
+          {/* 削除ボタン */}
+          {!hasAddButton && (
+            <div>
+              <button
+                className="text-gray-400 mr-0 ml-auto block"
+                onClick={handleDeleteClick}
+              >
+                削除する
+              </button>
+
+              <Modal
+                isOpen={isModalOpen}
+                onClose={handleCloseModal}
+                onConfirm={() => handleConfirmDelete(movie.id)}
+              />
+            </div>
           )}
         </div>
       </div>

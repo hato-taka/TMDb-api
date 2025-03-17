@@ -24,7 +24,6 @@ export default function Home() {
           ))}
         </div>
       </div>
-      <p className="my-8">リクエスト作品の削除はシロに連絡ください！</p>
 
       <hr className="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"/>
       <h1 className="text-2xl font-bold mt-10">上映中作品</h1>
